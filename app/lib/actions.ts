@@ -34,7 +34,6 @@ export type State = {
 };
 
 export const createInvoice = async (prevState: State, data: FormData) => {
-	console.log("data", data);
 	const validatedFields = CreateInvoice.safeParse({
 		customerId: data.get("customerId"),
 		amount: data.get("amount"),
@@ -62,7 +61,7 @@ export const createInvoice = async (prevState: State, data: FormData) => {
   `;
 	} catch (error) {
 		console.error(error);
-		// return { message: "Database error: Failed to create invoice." };
+		return { message: "Database error: Failed to create invoice." };
 	}
 
 	revalidatePath("/dashboard/invoices");
@@ -85,7 +84,7 @@ export const updateInvoice = async (id: string, data: FormData) => {
   `;
 	} catch (error) {
 		console.error(error);
-		// return { message: "Database error: Failed to update invoice." };
+		return { message: "Database error: Failed to update invoice." };
 	}
 
 	revalidatePath("/dashboard/invoices");
