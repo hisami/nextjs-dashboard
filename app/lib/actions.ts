@@ -32,6 +32,6 @@ export const createInvoice = async (data: FormData) => {
     VALUES (${customerId}, ${amountInCents}, ${status}, ${date})
   `;
 
-	// revalidatePath("/dashboard/invoices");
+	revalidatePath("/dashboard/invoices");
 	redirect("/dashboard/invoices");
 };
