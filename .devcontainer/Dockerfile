@@ -82,7 +82,7 @@ RUN sh -c "$(wget -O- https://github.com/deluan/zsh-in-docker/releases/download/
 RUN npm install -g @anthropic-ai/claude-code@${CLAUDE_CODE_VERSION}
 
 USER root
-RUN corepack enable && corepack prepare pnpm@latest --activate
+RUN corepack enable
 USER node
 
 
