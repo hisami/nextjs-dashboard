@@ -1,8 +1,15 @@
+import { GraphQLClient } from "graphql-request";
 import { Suspense } from "react";
 import AcmeLogo from "@/app/ui/acme-logo";
 import LoginForm from "@/app/ui/login-form";
+import { getSdk } from "../graphql/generated";
 
-export default function LoginPage() {
+const client = new GraphQLClient("http://localhost:8080/graphql");
+const sdk = getSdk(client);
+
+export default async function LoginPage() {
+	const data = await sdk.GetAuthor({ id: 1 });
+	console.log(data.author?.firstName);
 	return (
 		<main className="flex items-center justify-center md:h-screen">
 			<div className="relative mx-auto flex w-full max-w-[400px] flex-col space-y-2.5 p-4 md:-mt-32">
