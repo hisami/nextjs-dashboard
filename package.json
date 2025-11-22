@@ -4,7 +4,8 @@
 		"build": "next build",
 		"dev": "next dev --turbopack",
 		"start": "next start",
-		"lint": "next lint"
+		"lint": "next lint",
+		"codegen": "graphql-codegen --config ./app/graphql/codegen.ts"
 	},
 	"dependencies": {
 		"@heroicons/react": "^2.2.0",
@@ -24,6 +25,10 @@
 		"zod": "^3.25.17"
 	},
 	"devDependencies": {
+		"@graphql-codegen/cli": "^6.1.0",
+		"@graphql-codegen/typescript": "^5.0.5",
+		"@graphql-codegen/typescript-graphql-request": "^6.3.0",
+		"@graphql-codegen/typescript-operations": "^5.0.5",
 		"@types/bcrypt": "^5.0.2",
 		"@types/node": "22.10.7",
 		"@types/react": "19.0.7",
