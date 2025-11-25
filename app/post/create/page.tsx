@@ -27,7 +27,11 @@ export default function Page() {
 	return (
 		<Form
 			control={control}
-			onSubmit={({ formData }) => startTransition(() => formAction(formData))}
+			onSubmit={({ formData }) => {
+				startTransition(() => {
+					formAction(formData);
+				});
+			}}
 		>
 			<input id="title" {...register("title")} placeholder="Title" />
 			{errors.title && <p>{errors.title.message}</p>}
