@@ -8,13 +8,19 @@ export const authConfig = {
 	callbacks: {
 		authorized({ auth, request: { nextUrl } }) {
 			const isLoggedIn = !!auth?.user;
-			const isDashboardPath = nextUrl.pathname.startsWith("/dashboard");
-			if (isDashboardPath) {
-				if (isLoggedIn) return true;
-				return false;
-			} else if (isLoggedIn) {
+			const isProtectedPath =
+				nextUrl.pathname.startsWith("/dashboard") ||
+				nextUrl.pathname.startsWith("/post");
+
+			if (isProtectedPath) {
+				return isLoggedIn; // 保護されたパスは認証が必要
+			}
+
+			// ログイン済みでログインページにアクセスした場合はdashboardにリダイレクト
+			if (isLoggedIn && nextUrl.pathname === "/login") {
 				return Response.redirect(new URL("/dashboard", nextUrl));
 			}
+
 			return true;
 		},
 	},

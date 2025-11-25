@@ -1,11 +1,7 @@
-import { GraphQLClient } from "graphql-request";
 import { Suspense } from "react";
 import AcmeLogo from "@/app/ui/acme-logo";
 import LoginForm from "@/app/ui/login-form";
-import { getSdk } from "../graphql/generated";
-
-const client = new GraphQLClient("http://localhost:8080/graphql");
-const sdk = getSdk(client);
+import { sdk } from "../graphql/graphql-sdk";
 
 export default async function LoginPage() {
 	const data = await sdk.GetAuthor({ id: 1 });

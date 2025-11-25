@@ -1,0 +1,6 @@
+mutation AddComment($postId: Int!, $content: String!) {
+	addComment(postId: $postId, content: $content) {
+		id
+		content
+	}
+}

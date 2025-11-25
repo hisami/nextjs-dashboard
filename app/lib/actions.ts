@@ -5,8 +5,8 @@ import { redirect } from "next/navigation";
 import { AuthError } from "next-auth";
 import postgres from "postgres";
 import { z } from "zod";
-import { ca } from "zod/v4/locales";
 import { signIn } from "@/auth";
+import { sdk } from "../graphql/graphql-sdk";
 
 const sql = postgres(process.env.POSTGRES_URL ?? "", { ssl: "require" });
 
@@ -118,5 +118,25 @@ export const authenticate = async (
 			}
 		}
 		throw error;
+	}
+};
+
+export const createPost = async (
+	prevState: string | null,
+	formData: FormData,
+) => {
+	const title = formData.get("title");
+	const authorId = formData.get("authorId");
+
+	try {
+		// graphqlのcreatePost mutationを呼び出す
+		await sdk.CreatePost({
+			title: String(title),
+			authorId: Number(authorId),
+		});
+		return "Post created successfully!";
+	} catch (error) {
+		console.error(error);
+		return "Failed to create post.";
 	}
 };
